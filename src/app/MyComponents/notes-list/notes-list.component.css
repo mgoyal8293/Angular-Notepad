@@ -26,3 +26,16 @@
     font-size: 25px;
     color: #beb7b7;
 }
+
+.notes-list-note-title {
+    max-width: 70%;
+    height: 30px;
+    text-align: left;
+    overflow: hidden;
+}
+
+.notes-list-note-desc {
+    height: 90px;
+    overflow: hidden;
+    text-align: left;
+}
