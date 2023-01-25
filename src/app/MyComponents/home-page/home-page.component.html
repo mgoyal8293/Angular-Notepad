@@ -1,16 +1,12 @@
-<div *ngIf="appLoading; else elseBlock">
-    <app-loader [loader]="appLoading"></app-loader>
-</div>
-<ng-template #elseBlock>
-    <div class="container text-center">
-        <div class="row">
-            <div class="col">
-                <notes-list [listItems]="notesList" (showNoteDetail)="capturedNote=$event"
-                    [highlightPresent]="capturedNote"></notes-list>
-            </div>
-            <div class="col-9">
-                <note-detail [noteDetails]="capturedNote" (updateNoteDetail)="updateNote($event)"></note-detail>
-            </div>
+<app-loader [loader]="appLoading"></app-loader>
+<div class="container text-center" *ngIf="!appLoading">
+    <div class="row">
+        <div class="col-3">
+            <notes-list [listItems]="notesList" (showNoteDetail)="capturedNote=$event"
+                [highlightPresent]="capturedNote"></notes-list>
+        </div>
+        <div class="col-9">
+            <note-detail [noteDetails]="capturedNote" (updateNoteDetail)="updateNote($event)"></note-detail>
         </div>
     </div>
-</ng-template>
+</div>

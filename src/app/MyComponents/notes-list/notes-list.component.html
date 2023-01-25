@@ -11,6 +11,9 @@
                     blandit.
                 </p>
             </a>
+            <div *ngIf="!notesList.length" class="notes-list-empty">
+                <span>Zero notes</span>
+            </div>
         </div>
     </div>
 </div>
