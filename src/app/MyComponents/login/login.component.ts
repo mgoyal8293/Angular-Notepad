@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, HostListener } from '@angular/core';
 import { Router } from '@angular/router';
 import { HelperService } from 'src/app/MyServices/helper.service';
+import { HttpService } from 'src/app/MyServices/http.service';
 import { LoginService } from 'src/app/MyServices/login.service';
 import { CONSTANTS } from '../notepad-static-data';
 
@@ -17,7 +18,8 @@ export class LoginComponent {
   public appLoading : boolean = false;
 
   private _service = new LoginService();
-  private _helper = new HelperService(this._httpClient);
+  private _helper = new HelperService();
+  private _httpHelper = new HttpService(this._httpClient);
 
   constructor(private router: Router, private _httpClient: HttpClient) {}
 
@@ -30,8 +32,8 @@ export class LoginComponent {
     }
     this.appLoading = true;
 
-    isSigningUp ? this._helper.getDataFromDB().subscribe(_response => this._isUserAlreadyPresent(_response)) :
-      this._helper.getDataFromDB().subscribe(_response => this._afterRecievingdata(_response));
+    isSigningUp ? this._httpHelper.getDataFromDB().subscribe(_response => this._isUserAlreadyPresent(_response)) :
+      this._httpHelper.getDataFromDB().subscribe(_response => this._afterRecievingdata(_response));
   }
 
   _isUserAlreadyPresent(_response: any) {
@@ -42,7 +44,7 @@ export class LoginComponent {
       alert('Username already present');
       window.location.reload();
     } else {
-      this._helper.addNewUserToDB(this.userName, this.password).subscribe(_response => this._afterAddingNewUser(_response));
+      this._httpHelper.addNewUserToDB(this.userName, this.password).subscribe(_response => this._afterAddingNewUser(_response));
     }
   }
  

@@ -1,4 +1,3 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { CONSTANTS, HttpRequestFormat } from '../MyComponents/notepad-static-data';
 
@@ -7,31 +6,7 @@ import { CONSTANTS, HttpRequestFormat } from '../MyComponents/notepad-static-dat
 })
 export class HelperService {
 
-  constructor(private _httpClient: HttpClient) {}
-
-  getDataFromDB() {
-    let inputs = this._getConstantData();
-    return this._httpClient.get<HttpRequestFormat[]>(inputs.url, inputs.options);
-  }
-
-  updateDataInDB(user: any) {
-    let _url = this._getUserURL(user._id);
-    return this._httpClient.put(_url, user, this._getConstantData().options);
-  }
-
-  addNewUserToDB(name: string, password: string) {
-    let inputs = this._getConstantData();
-    let user = this._createNewUser(name, password);
-    return this._httpClient.post<HttpRequestFormat[]>(inputs.url, user, inputs.options);
-  }
-
-  _createNewUser(name: string, password: string) {
-    return {
-      password: password,
-      notes : [],
-      userName : name
-    }
-  }
+  constructor() {}
 
   saveToLocalStorage(user: any) {
     sessionStorage.setItem(CONSTANTS.objectId, user._id);
@@ -67,19 +42,21 @@ export class HelperService {
   }
 
   getFormattedData(_event: any, _notesList: any) {
-    let NOTES_LIST = 'notesList';
-    let SELECTED_NOTE = 'selectedNote';    
-
-    if (_event.isDeleteing) {
+    if (_event.isDeleting) {
       _notesList = this._deleteItemFromList(_event.note.id, _notesList);
-      return {NOTES_LIST: _notesList, SELECTED_NOTE: {}}
+      return {notesList: _notesList, selectedNote: {}}
     } else if (_event.isAdding) {
       _event.note.id = this._addIdToItem(_notesList);
       _notesList.push(_event.note);
-      return {NOTES_LIST: _notesList, SELECTED_NOTE: _event.note}
+      return {notesList: _notesList, selectedNote: _event.note}
     } else {
-      return {NOTES_LIST: _notesList, SELECTED_NOTE: _event.note};
+      return {notesList: _notesList, selectedNote: _event.note};
     }
+  }
+
+  isObjectEmpty(obj : any) {
+    let stringifyChange = JSON.stringify(obj);
+    return (stringifyChange === '{}') ? true : false;
   }
 
   _deleteItemFromList(deletedNoteId: number, _notesList: any) {
@@ -94,19 +71,11 @@ export class HelperService {
     return _notesList;
   }
 
-  _getConstantData() {
-    return {
-      url : CONSTANTS.url,
-      options: { headers: new HttpHeaders(CONSTANTS.headers) }
-    }
-  }
-
-  _getUserURL(id : any) {
-    return CONSTANTS.url + '/' + id;
-  }
-
   _addIdToItem(_notesList: any) {
     let length = _notesList.length;
+    if (!length) {
+      return 1;
+    }
     let lastNote = _notesList[length - 1];
     return (lastNote.id + 1);
   }

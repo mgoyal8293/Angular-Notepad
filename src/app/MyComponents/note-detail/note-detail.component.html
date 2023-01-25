@@ -5,16 +5,17 @@
             <div class="container-item col-9 container-item-journal">
                 <label for="entry-title" class="journal-label">Entry Title</label>
                 <input type="text" name="entry-title" id="entry-title" class="entry-text-title rounded"
-                    placeholder="Name of entry ✏️" value="{{selectedNote ? selectedNote.title : ''}}" [(ngModel)]="selectedNote.title"/>
+                    placeholder="Name of entry ✏️" value="{{(selectedNote| json) != '{}' ? selectedNote.title : ''}}"
+                    [(ngModel)]="selectedNote.title" (ngModelChange)="onValueChange($event)"/>
                 <label for="entry" class="journal-label">Today's Entry</label>
                 <textarea name="daily-entry" id="entry" class="entry-text-box rounded" placeholder="What's on your mind today? 💭"
-                    value="{{selectedNote ? selectedNote.desc : ''}}" [(ngModel)]="selectedNote.desc"></textarea>
+                    value="{{selectedNote ? selectedNote.desc : ''}}" [(ngModel)]="selectedNote.desc" (ngModelChange)="onValueChange($event)"></textarea>
                 <button class="btn-main entry-submit-btn" type="submit" (click)="saveNote()">Save
                 </button>
-                <button class="btn-main entry-submit-btn entry-submit-btn-left" type="submit" (click)="deleteNote()">Delete
-                </button>
-                <button class="btn-main entry-submit-btn entry-submit-btn-left" type="submit" (click)="addNote()">Clear
-                </button>
+                <button *ngIf="selectedNote.id" class="btn-main entry-submit-btn entry-submit-btn-left" type="submit"
+                        (click)="deleteNote()">Delete</button>
+                <button *ngIf="showClearButton" class="btn-main entry-submit-btn entry-submit-btn-left" type="submit"
+                        (click)="clearSelected()">Clear</button>
             </div>
         </div>
     </div>
