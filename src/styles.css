@@ -13,7 +13,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 app-root {
     width: 100%;
     display: block;
-    height: 99vh;
+    min-height: 100vh;
     background: rgba(175, 238, 238, 0.3);
     scroll-behavior: smooth;
     font-family: 'Space Mono', monospace;

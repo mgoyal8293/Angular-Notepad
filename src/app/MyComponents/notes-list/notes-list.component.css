@@ -1,11 +1,11 @@
 .scrollbar {
     overflow: scroll;
-    height: 550px;
+    height: 539px;
     cursor: pointer;
 }
 
 .notes-list-container {
-    border-bottom: rgba(0, 0, 0, 0.125) solid 1px;
+    border: rgba(0, 0, 0, 0.125) solid 1px;
 }
 
 .notes-list-active {
@@ -18,3 +18,11 @@
     box-shadow: 0.5rem 0rem 0.5rem;
 }
 
+.notes-list-empty {
+    margin: auto;
+}
+
+.notes-list-empty span {
+    font-size: 25px;
+    color: #beb7b7;
+}

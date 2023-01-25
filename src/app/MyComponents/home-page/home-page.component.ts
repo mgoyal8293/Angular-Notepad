@@ -11,7 +11,7 @@ import { CONSTANTS, HttpRequestFormat } from '../notepad-static-data';
 })
 export class HomePageComponent implements OnInit {
   private _helperService = new HelperService(this._httpClient);
-  private _constantData = this._helperService.getConstantData();
+  private _constantData = this._helperService._getConstantData();
   private _hero: {} | any;
 
   public appLoading: boolean = true;
