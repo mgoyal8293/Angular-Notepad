@@ -21,7 +21,7 @@ export class LoginComponent {
 
   constructor(private router: Router, private _httpClient: HttpClient) {}
 
-  clickLoginButton() {
+  clickLoginButton(isSigningUp? : boolean) {
     let _validation = this._service.validateDetails(this.userName, this.password);
 
     if (_validation.error) {
@@ -29,13 +29,36 @@ export class LoginComponent {
       return;
     }
     this.appLoading = true;
-    this._helper.getDataFromDB().subscribe(_response => this.afterRecievingdata(_response));
+
+    isSigningUp ? this._helper.getDataFromDB().subscribe(_response => this._isUserAlreadyPresent(_response)) :
+      this._helper.getDataFromDB().subscribe(_response => this._afterRecievingdata(_response));
   }
 
-  afterRecievingdata(_response: any) {
-    let authUser: any = this._helper.getAuthUserData(_response);
-    this._helper.saveToLocalStorage(authUser);
-    this.router.navigate(['/' + CONSTANTS.homePageRoute, authUser._id]);
+  _isUserAlreadyPresent(_response: any) {
+    let authUser: any = this._helper.getAuthUserData(_response, this.userName);
+    if (authUser._id) {
+      //error
+      this.appLoading = false;
+      alert('Username already present');
+      window.location.reload();
+    } else {
+      this._helper.addNewUserToDB(this.userName, this.password).subscribe(_response => this._afterAddingNewUser(_response));
+    }
+  }
+ 
+  _afterAddingNewUser(_response: any) {
+    this._helper.saveToLocalStorage(_response);
+    this.router.navigate(['/' + CONSTANTS.homePageRoute, _response._id]);
   }
 
+  _afterRecievingdata(_response: any) {
+    let authUser: any = this._helper.getAuthUserData(_response, this.userName);
+    if (!authUser.error) {
+      this._helper.saveToLocalStorage(authUser);
+      this.router.navigate(['/' + CONSTANTS.homePageRoute, authUser._id]);
+      return;
+    }
+    alert('Username not found');
+    window.location.reload();
+  }
 }

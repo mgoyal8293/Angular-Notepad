@@ -12,7 +12,7 @@
         <input type="password" class="form-control login-btn-test" [(ngModel)]="password" id="exampleInputPassword1" placeholder="Password">
     </div>
     <button type="submit" class="login-btn-main login-entry-submit-btn" (click)="clickLoginButton()">Log In</button>
-    <!-- <button type="button" class="btn btn-outline-secondary btn-sm log-in-btn-signup">Sign Up</button> -->
+    <button type="button" class="btn btn-outline-secondary btn-sm log-in-btn-signup" (click)="clickLoginButton(true)">Sign Up</button>
 </div>
 
 <app-loader [loader]="appLoading"></app-loader>

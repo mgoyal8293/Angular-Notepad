@@ -1,5 +1,4 @@
 export interface HttpRequestFormat {
-    userId : number,
     password : string,
     notes : JSON,
     userName : string
@@ -8,7 +7,6 @@ export const CONSTANTS = {
     homePageRoute: 'home',
     urlParam: 'id',
     objectId: 'objectId',
-    userId: 'userId',
     notes: 'notes',
     password: 'password',
     userName: 'userName',
