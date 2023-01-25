@@ -2,7 +2,7 @@
 <div class="container text-center" *ngIf="!appLoading">
     <div class="row">
         <div class="col-3">
-            <notes-list [listItems]="notesList" (showNoteDetail)="capturedNote=$event"
+            <notes-list [listItems]="notesList" (showNoteDetail)="capturedNote = $event"
                 [highlightPresent]="capturedNote"></notes-list>
         </div>
         <div class="col-9">

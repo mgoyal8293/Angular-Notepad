@@ -4,15 +4,15 @@
             <a class="list-group-item list-group-item-action" [ngClass]="noteActive===note.id ? 'notes-list-active' : ''"
                 (click)="onNoteClick(note)" *ngFor="let note of notesList">
                 <div class="d-flex w-100 justify-content-between">
-                    <h5 class="mb-1">{{note.title}}</h5>
-                    <small>3 days ago</small>
+                    <h2 class="mb-1 notes-list-note-title">{{note.title}}</h2>
+                    <!-- <small>3 days ago</small> -->
                 </div>
-                <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius
-                    blandit.
+                <p class="mb-1 notes-list-note-desc">
+                    {{note.desc}}
                 </p>
             </a>
             <div *ngIf="!notesList.length" class="notes-list-empty">
-                <span>Zero notes</span>
+                <span>List Empty</span>
             </div>
         </div>
     </div>
