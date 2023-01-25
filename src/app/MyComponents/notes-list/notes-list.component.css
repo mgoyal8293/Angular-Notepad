@@ -1,0 +1,20 @@
+.scrollbar {
+    overflow: scroll;
+    height: 550px;
+    cursor: pointer;
+}
+
+.notes-list-container {
+    border-bottom: rgba(0, 0, 0, 0.125) solid 1px;
+}
+
+.notes-list-active {
+    background-color: #fafad2;
+    color: #f08080;
+}
+
+.list-group-item:hover {
+    transform: scale(1.03);
+    box-shadow: 0.5rem 0rem 0.5rem;
+}
+

@@ -1,0 +1,18 @@
+<div class="notes-list-centre log-in-container">
+
+    <div class="form-group log-in-item"><img src="/assets/images/logo.png" class="log-in-logo"> </div>
+    <div class="form-group log-in-item">
+        <label for="exampleInputEmail1">Username</label>
+        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+            placeholder="Enter Username" [(ngModel)]="userName">
+        <small id="emailHelp" class="form-text text-muted"></small>
+    </div>
+    <div class="form-group log-in-item">
+        <label for="exampleInputPassword1">Password</label>
+        <input type="password" class="form-control login-btn-test" [(ngModel)]="password" id="exampleInputPassword1" placeholder="Password">
+    </div>
+    <button type="submit" class="login-btn-main login-entry-submit-btn" (click)="clickLoginButton()">Log In</button>
+    <!-- <button type="button" class="btn btn-outline-secondary btn-sm log-in-btn-signup">Sign Up</button> -->
+</div>
+
+<app-loader [loader]="appLoading"></app-loader>

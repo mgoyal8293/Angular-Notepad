@@ -1,0 +1,157 @@
+/* My Starter Template */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* body {
+  font-family: 'Space Mono', monospace;
+  line-height: 1.6;
+  background: rgba(175, 238, 238, 0.3);
+  color: lightcoral;
+  margin: 0 auto;
+  padding: 0;
+  max-width: 900px;
+} */
+
+/* Global Typography */
+
+button {
+  display: block;
+  font-size: 1.2rem;
+  padding: 0.5em 1em;
+  border: none;
+
+  font-family: 'Space Mono', monospace;
+}
+
+/* Section Container Positions, Spacing, Utilities */
+
+.section {
+  padding: 1em 1em;
+  width: 100%;
+  margin: 1em auto;
+}
+
+.container {
+  width: 100%;
+  margin: 0 auto;
+  padding: 1em 1em;
+}
+
+.container-row {
+  width: 90%;
+  margin: 0 auto;
+}
+
+/* Button Standard */
+
+.btn-main {
+  display: inline-block;;
+  padding: 0.6rem 2rem;
+  margin: 1rem;
+  transition: all 0.1s;
+  border: none;
+  border-radius: 2px;
+  cursor: pointer;
+  color: #fafad2;
+  background-color: #f08080;
+}
+
+button[class^='btn-']:hover,
+a[class^='btn-']:hover,
+input[class^='btn-']:hover {
+  background-color: #fafad2;
+  color: #f08080;
+  font-weight: 700;
+  transform: scale(1.08);
+}
+
+/* Project Starts Here */
+
+/* Journal Entry Section */
+
+/* Title */
+
+.entry-text-title {
+  width: 100%;
+  margin: 1em auto;
+  padding: 1em;
+  border-radius: 2px;
+  border: unset;
+  background-color: #fafad2;
+  font-family: 'Space Mono', monospace;
+}
+
+.entry-text-title:focus {
+  outline-color: #f08080;
+  color: #f08080;
+}
+
+.entry-text-title::placeholder {
+  color: #f08080;
+  font-family: 'Space Mono', monospace;
+  font-size: 1rem;
+}
+
+.entry-text-title::-ms-value {
+  color: #f08080;
+  font-family: 'Space Mono', monospace;
+  font-size: 1rem;
+}
+
+/* Text Box */
+
+.container-row-journal {
+  display: flex;
+  justify-content: center;
+}
+
+.entry-form {
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.journal-label {
+  display: block;
+  line-height: 1.6;
+  font-size: 1.2rem;
+  font-weight: 700;
+  text-align: left;
+  font-family: 'Space Mono', monospace;
+  color: #f08080;
+}
+
+.entry-text-box {
+  width: 100%;
+  height: 320px;
+  margin: 1em auto;
+  padding: 1em;
+  border-radius: 2px;
+  border: unset;
+  background-color: #fafad2;
+  font-family: 'Space Mono', monospace;
+}
+
+.entry-text-box:focus {
+  outline-color: #f08080;
+  font-family: 'Space Mono', monospace;
+  color: #f08080;
+  font-size: 1rem;
+}
+
+.entry-text-box::placeholder {
+  color: #f08080;
+  font-family: 'Space Mono', monospace;
+  font-size: 1rem;
+}
+
+.entry-submit-btn {
+  margin: 0;
+}
+
+.entry-submit-btn-left {
+  margin-left: 3rem;
+}

@@ -1,0 +1,49 @@
+.log-in-container {
+    width: 380px;
+    padding: 20px 10px;
+    height: max-content;
+    box-shadow: 0rem 0rem 1rem;
+    border-radius: 3px;
+    background: #ffffff;
+}
+
+.login-btn-main {
+    display: grid;
+    width: 95%;
+    padding: 0.6rem 2rem;
+    margin: 1rem;
+    transition: all 0.1s;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+    color: #fafad2;
+    background-color: #f08080;
+}
+
+button[class^='login-btn-']:hover,
+a[class^='login-btn-']:hover,
+input[class^='login-btn-']:hover {
+    background-color: #fafad2;
+    color: #f08080;
+    font-weight: 700;
+    transform: scale(1.08);
+}
+
+.login-entry-submit-btn {
+    margin: auto;
+}
+
+.log-in-item {
+    margin: 12px 0px;
+}
+
+.log-in-btn-signup {
+    margin-top: 10px;
+    margin-left: 75%;
+}
+
+.log-in-logo {
+    display: block;
+    width: 40%;
+    margin: auto;
+}
