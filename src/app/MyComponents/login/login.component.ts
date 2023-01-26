@@ -1,9 +1,9 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, HostListener } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { HelperService } from 'src/app/MyServices/helper.service';
 import { HttpService } from 'src/app/MyServices/http.service';
-import { LoginService } from 'src/app/MyServices/login.service';
+import { ValidatorService } from 'src/app/MyServices/validator.service';
 import { CONSTANTS } from '../notepad-static-data';
 
 @Component({
@@ -13,18 +13,18 @@ import { CONSTANTS } from '../notepad-static-data';
 })
 export class LoginComponent {
 
-  public userName : string = '';
-  public password : string = '';
-  public appLoading : boolean = false;
+  public userName: string = '';
+  public password: string = '';
+  public appLoading: boolean = false;
 
-  private _service = new LoginService();
+  private _validator = new ValidatorService();
   private _helper = new HelperService();
   private _httpHelper = new HttpService(this._httpClient);
 
-  constructor(private router: Router, private _httpClient: HttpClient) {}
+  constructor(private router: Router, private _httpClient: HttpClient) { }
 
-  clickLoginButton(isSigningUp? : boolean) {
-    let _validation = this._service.validateDetails(this.userName, this.password);
+  clickLoginButton(isSigningUp?: boolean) {
+    let _validation = this._validator.loginDetails(this.userName, this.password);
 
     if (_validation.error) {
       alert(_validation.message);
@@ -37,7 +37,7 @@ export class LoginComponent {
   }
 
   _isUserAlreadyPresent(_response: any) {
-    let authUser: any = this._helper.getAuthUserData(_response, this.userName);
+    let authUser: any = this._helper.getAuthUserData(_response, this.userName, this.password);
     if (authUser._id) {
       //error
       this.appLoading = false;
@@ -47,14 +47,14 @@ export class LoginComponent {
       this._httpHelper.addNewUserToDB(this.userName, this.password).subscribe(_response => this._afterAddingNewUser(_response));
     }
   }
- 
+
   _afterAddingNewUser(_response: any) {
     this._helper.saveToLocalStorage(_response);
     this.router.navigate(['/' + CONSTANTS.homePageRoute, _response._id]);
   }
 
   _afterRecievingdata(_response: any) {
-    let authUser: any = this._helper.getAuthUserData(_response, this.userName);
+    let authUser: any = this._helper.getAuthUserData(_response, this.userName, this.password);
     if (!authUser.error) {
       this._helper.saveToLocalStorage(authUser);
       this.router.navigate(['/' + CONSTANTS.homePageRoute, authUser._id]);

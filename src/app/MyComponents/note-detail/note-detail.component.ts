@@ -22,6 +22,11 @@ export class NoteDetailComponent implements OnChanges {
   }
 
   saveNote() {
+    let _validator = this._helper.isObjectEmpty(this.selectedNote);
+    if(_validator) {
+      alert('Nothing to Add.');
+      return;
+    }
     this.selectedNote.id ? this.updateNoteDetail.emit({ note: this.selectedNote }) :
         this.updateNoteDetail.emit({ note: this.selectedNote, isAdding: true });
   }

@@ -32,9 +32,9 @@ export class HelperService {
     }
   }
 
-  getAuthUserData(usersList : HttpRequestFormat[], userName: string) {
+  getAuthUserData(usersList : HttpRequestFormat[], userName: string, password: string) {
     for (let user of usersList) {
-      if (user.userName === userName) {
+      if (user.userName === userName && user.password === password) {
         return user;
       }
     }
