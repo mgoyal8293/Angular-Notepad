@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { CONSTANTS } from '../MyComponents/notepad-static-data';
+import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root'
@@ -8,46 +8,60 @@ export class ValidatorService {
 
   constructor() { }
 
-  loginDetails(username: string, password: string) {
-    let _returningObj = this._emptyFieldValidator(username, password);
-    if (!_returningObj.error) {
-      _returningObj = this._invalidCharValidator(username, password);
-      if (!_returningObj.error) {
-        _returningObj = this._whiteSpaceValidator(username, password);
+  _patternValidator(regex: RegExp, error: ValidationErrors): ValidatorFn {
+    return (control: AbstractControl): { [key: string]: any } | null => {
+      if (!control.value) {
+        return {};
       }
-    }
-    return _returningObj;
+      const valid = regex.test(control.value);
+
+      return valid ? null : error;
+    };
   }
 
-  _invalidCharValidator(username: string, password: string) {
-    if (username.match(/[-!$%^&*()+|~=`{}\[\]:";#'<>?,\/]/)) {
-      return { error: true, message: CONSTANTS.userNameEmpty };
-    } else if (password.match(/[-()+|~=`{}\[\]:";'<>,.\/]/)) {
-      return { error: true, message: CONSTANTS.passwordEmpty };
+  _passwordMatchValidator(control: any) {
+    const password: string = control.get('password').value;
+    const confirmPassword: string = control.get('confirmPassword').value;
+    if (password !== confirmPassword) {
+      control.get('confirmPassword').setErrors({ NoPassswordMatch: true });
     }
-    return { error: false };
   }
 
-  _whiteSpaceValidator(username: string, password: string) {
-    let isWhitespace = username.match(/\s/g);
-    if (!isWhitespace?.length) {
-      isWhitespace = password.match(/\s/g);
-      if (!isWhitespace?.length) {
-        return { error: false };
-      }
-    }
-    return { error: true, message: CONSTANTS.userNameEmpty };
-    
-  }
+  createLogInForm(builder: FormBuilder, signUpForm: boolean): FormGroup {
+    const emailValidations = [
+      null,
+      Validators.compose([
+        Validators.email,
+        Validators.required
+      ])
+    ], passwordValidations = [
+      null,
+      Validators.compose([
+        Validators.required,
+        this._noWhitespaceValidator,
+        Validators.minLength(6)
+      ])
+    ];
 
-  _emptyFieldValidator(username: string, password: string) {
-    if (!username) {
-      return { error: true, message: CONSTANTS.userNameEmpty };
-    } else if (!password) {
-      return { error: true, message: CONSTANTS.passwordEmpty };
+    if (signUpForm) {
+      return builder.group({
+        email: emailValidations,
+        password: passwordValidations,
+        confirmPassword: [null, Validators.compose([Validators.required])]
+      }, {
+        validator: this._passwordMatchValidator
+      });
     } else {
-      return { error: false };
+      return builder.group({
+        email: emailValidations,
+        password: passwordValidations
+      });
     }
   }
 
+  _noWhitespaceValidator(control: any) {
+    let isWhitespace = (control.value || '').match(/\s/g);
+    const isValid = !isWhitespace;
+    return isValid ? null : { hasWhiteSpace: true };
+  }
 }

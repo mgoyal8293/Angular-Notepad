@@ -7,7 +7,7 @@ import { AppComponent } from './app.component';
 import { NotesListComponent } from './MyComponents/notes-list/notes-list.component';
 import { NoteDetailComponent } from './MyComponents/note-detail/note-detail.component';
 import { LoaderComponent } from './MyComponents/loader/loader.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HomePageComponent } from './MyComponents/home-page/home-page.component';
 import { HelperService } from './MyServices/helper.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -27,6 +27,7 @@ import { LoginComponent } from './MyComponents/login/login.component';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
     BrowserAnimationsModule
   ],
   providers: [HelperService],
