@@ -3,11 +3,11 @@
     <div class="container">
         <div class="container-row container-row-journal">
             <div class="container-item col-9 container-item-journal">
-                <label for="entry-title" class="journal-label">Entry Title</label>
+                <label for="entry-title" class="journal-label">Note Title</label>
                 <input type="text" name="entry-title" id="entry-title" class="entry-text-title rounded"
                     placeholder="Name of entry ✏️" value="{{(selectedNote| json) != '{}' ? selectedNote.title : ''}}"
                     [(ngModel)]="selectedNote.title" (ngModelChange)="onValueChange($event)"/>
-                <label for="entry" class="journal-label">Today's Entry</label>
+                <label for="entry" class="journal-label">Note Description</label>
                 <textarea name="daily-entry" id="entry" class="entry-text-box rounded" placeholder="What's on your mind today? 💭"
                     value="{{selectedNote ? selectedNote.desc : ''}}" [(ngModel)]="selectedNote.desc" (ngModelChange)="onValueChange($event)"></textarea>
                 <button class="btn-main entry-submit-btn" type="submit" (click)="saveNote()">Save
