@@ -37,6 +37,14 @@ input[class^='login-btn-']:hover {
     margin: 12px 0px;
 }
 
+.log-in-item label {
+    color: #f7c22a;
+}
+
+.log-in-item h3 {
+    text-align: center;
+}
+
 .log-in-btn-signup {
     margin-top: 10px;
     margin-left: 75%;
@@ -46,4 +54,12 @@ input[class^='login-btn-']:hover {
     display: block;
     width: 40%;
     margin: auto;
+}
+
+button[disabled] {
+    cursor: not-allowed;
+    font-weight: 1 !important;
+    color: #fafad2 !important;
+    background-color: #f08080 !important;
+    transform: scale(1) !important;
 }
